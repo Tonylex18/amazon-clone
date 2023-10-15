@@ -48,12 +48,28 @@ export class UserControllerBase {
   })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        review: data.review
+          ? {
+              connect: data.review,
+            }
+          : undefined,
+      },
       select: {
         createdAt: true,
         firstName: true,
         id: true,
+        isAdmin: true,
         lastName: true,
+
+        review: {
+          select: {
+            id: true,
+          },
+        },
+
         roles: true,
         updatedAt: true,
         username: true,
@@ -81,7 +97,15 @@ export class UserControllerBase {
         createdAt: true,
         firstName: true,
         id: true,
+        isAdmin: true,
         lastName: true,
+
+        review: {
+          select: {
+            id: true,
+          },
+        },
+
         roles: true,
         updatedAt: true,
         username: true,
@@ -110,7 +134,15 @@ export class UserControllerBase {
         createdAt: true,
         firstName: true,
         id: true,
+        isAdmin: true,
         lastName: true,
+
+        review: {
+          select: {
+            id: true,
+          },
+        },
+
         roles: true,
         updatedAt: true,
         username: true,
@@ -143,12 +175,28 @@ export class UserControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          review: data.review
+            ? {
+                connect: data.review,
+              }
+            : undefined,
+        },
         select: {
           createdAt: true,
           firstName: true,
           id: true,
+          isAdmin: true,
           lastName: true,
+
+          review: {
+            select: {
+              id: true,
+            },
+          },
+
           roles: true,
           updatedAt: true,
           username: true,
@@ -185,7 +233,15 @@ export class UserControllerBase {
           createdAt: true,
           firstName: true,
           id: true,
+          isAdmin: true,
           lastName: true,
+
+          review: {
+            select: {
+              id: true,
+            },
+          },
+
           roles: true,
           updatedAt: true,
           username: true,
